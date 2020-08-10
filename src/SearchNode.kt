@@ -1,0 +1,1 @@
+class SearchNode(val parent: SearchNode?, val board: Board, val cost: Int)
