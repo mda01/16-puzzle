@@ -1,16 +1,22 @@
 import kotlin.math.min
-import kotlin.time.Duration
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
+/**
+ * Creates a Solver from a Board
+ */
 class Solver(private val board: Board) {
     private lateinit var solNode: SearchNode
     private var elapsedTime: Long = 0
 
+    /**
+     * Starts the resolution of the problem
+     */
     fun solve() {
         elapsedTime = kotlin.system.measureTimeMillis {
             var threshold = -1
             var s = 4000
+            // usual IDA* stuff, but infinity is 4000
             while (s != -1) {
                 threshold++
                 print("Threshold: ")
@@ -21,6 +27,9 @@ class Solver(private val board: Board) {
         }
     }
 
+    /**
+     * IDA* search function
+     */
     private fun search(node: SearchNode, threshold: Int): Int {
         val h = node.board.heuristic()
         val g = node.cost + h
@@ -41,6 +50,9 @@ class Solver(private val board: Board) {
         return mini
     }
 
+    /**
+     * Used for printing purposes
+     */
     private fun parent(node: SearchNode): String {
         return if (node.parent == null) {
             node.board.toString() + '\n'
@@ -49,6 +61,9 @@ class Solver(private val board: Board) {
         }
     }
 
+    /**
+     * Prints the solution if it has been computed, or else an informative message
+     */
     override fun toString(): String {
         val sb = StringBuilder()
         if (this::solNode.isInitialized) {

@@ -1,3 +1,1 @@
-class InvalidBoardException(s: String) : Exception(s) {
-
-}
+class InvalidBoardException(s: String) : Exception(s)
