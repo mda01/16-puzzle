@@ -142,7 +142,7 @@ class Board {
     /**
      * Returns a Board if the move is legal, else null
      */
-    private fun moveTop(): Board? {
+    private fun moveUp(): Board? {
         val t2 = tiles.clone()
         t2[15] = t2[15] shr 4
         return if (t2[15] != 0u) {
@@ -159,7 +159,7 @@ class Board {
     /**
      * Returns a Board if the move is legal, else null
      */
-    private fun moveBot(): Board? {
+    private fun moveDown(): Board? {
         val t2 = tiles.clone()
         t2[15] = t2[15] shl 4
         return if (t2[15] and 0b1111111111111111u != 0u) {
@@ -180,8 +180,8 @@ class Board {
         val res = ArrayList<Board>()
         val ml = moveLeft()
         val mr = moveRight()
-        val mt = moveTop()
-        val mb = moveBot()
+        val mt = moveUp()
+        val mb = moveDown()
         if (ml != null)
             res += ml
         if (mr != null)
